@@ -1,13 +1,7 @@
 import axios from "axios";
 
-const baseURL = import.meta.env.VITE_API_BASE_URL;
-
-if (!baseURL) {
-    throw new Error("VITE_API_BASE_URL não definida no .env");
-}
-
 const api = axios.create({
-    baseURL,
+    baseURL: import.meta.env.VITE_API_BASE_URL,
 });
 
 api.interceptors.response.use(
