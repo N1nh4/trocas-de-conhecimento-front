@@ -1,15 +1,20 @@
 import axios from "axios";
 
+const baseURL = import.meta.env.VITE_API_BASE_URL;
+
+if (!baseURL) {
+    throw new Error("VITE_API_BASE_URL não definida no .env");
+}
+
 const api = axios.create({
-    baseURL: import.meta.env.VITE_API_BASE_URL || "http://localhost:8080",
+    baseURL,
 });
 
 api.interceptors.response.use(
-    r => r,
-    err => {
-        console.log(err);
-        return Promise.reject(err);
-    }
+    response => response,
+    error => Promise.reject(error)
 );
 
 export default api;
+
+
