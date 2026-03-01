@@ -56,14 +56,16 @@ export default function NovaOferta() {
           <p>Compartilhe o que você sabe com a comunidade.</p>
         </div>
         {/* Formulário de cadastro */}
-        <div className="bg-white text-black flex flex-col font-semibold p-6 rounded-xl w-md ">
+        <div className="bg-white text-black flex flex-col  p-6 rounded-xl w-md ">
           <form
             action=""
             className="flex flex-col gap-4 "
             onSubmit={handleSubmit}
           >
             <div className="flex flex-col">
-              <label htmlFor="">Título *</label>
+              <label htmlFor="" className="font-semibold">
+                Título *
+              </label>
               <input
                 type="text"
                 name="titulo"
@@ -71,30 +73,36 @@ export default function NovaOferta() {
                 placeholder="Ex: React do Zero"
                 value={titulo}
                 onChange={(e) => setTitulo(e.target.value)}
-                className="bg-[#F9FBFA] border border-[#DCE5E0] rounded-xl  py-2 px-3"
+                className="bg-[#F9FBFA] border border-[#DCE5E0] rounded-xl focus:outline-none focus:border-[#24B195] focus:ring-[#24B195] py-2 px-3"
               />
             </div>
             <div className="flex flex-col">
-              <label htmlFor="">Descrição *</label>
+              <label htmlFor="" className="font-semibold">
+                Descrição *
+              </label>
               <textarea
                 name="descricao"
                 id="descriacao"
                 placeholder="Descreva o conhecimento..."
                 value={descricao}
                 onChange={(e) => setDescricao(e.target.value)}
-                className="bg-[#F9FBFA] border border-[#DCE5E0] rounded-xl py-2 px-3"
+                className="bg-[#F9FBFA] border border-[#DCE5E0] focus:outline-none focus:border-[#24B195] focus:ring-[#24B195] rounded-xl py-2 px-3"
               ></textarea>
             </div>
             <div className="flex flex-col">
-              <label htmlFor="">Categoria *</label>
+              <label htmlFor="" className="font-semibold">
+                Categoria *
+              </label>
               <select
                 name="categoria"
                 id="categoria"
                 onChange={(e) => setCategoria(e.target.value)}
                 value={categoria}
-                className="bg-[#F9FBFA] border border-[#DCE5E0] rounded-xl py-2 px-3"
+                className="bg-[#F9FBFA] border border-[#DCE5E0] focus:outline-none focus:border-[#24B195] focus:ring-[#24B195] rounded-xl py-2 px-3"
               >
-                <option value="">Selecione</option>
+                <option value="" className="font-normal">
+                  Selecione
+                </option>
                 {categorias.map((c) => (
                   <option key={c} value={c}>
                     {c}
@@ -103,13 +111,15 @@ export default function NovaOferta() {
               </select>
             </div>
             <div className="flex flex-col">
-              <label htmlFor="">Nível *</label>
+              <label htmlFor="" className="font-semibold">
+                Nível *
+              </label>
               <select
                 name="nivel"
                 id="nivel"
                 onChange={(e) => setNivel(e.target.value)}
                 value={nivel}
-                className="bg-[#F9FBFA] border border-[#DCE5E0] rounded-xl  py-2 px-3"
+                className="bg-[#F9FBFA] border border-[#DCE5E0] rounded-xl focus:outline-none focus:border-[#24B195] focus:ring-[#24B195] py-2 px-3"
               >
                 <option value="">Selecione</option>
                 {niveis.map((n) => (
@@ -120,13 +130,15 @@ export default function NovaOferta() {
               </select>
             </div>
             <div className="flex flex-col">
-              <label htmlFor="">Pessoa responsável *</label>
+              <label htmlFor="" className="font-semibold">
+                Pessoa responsável *
+              </label>
               <select
                 name="responsavel"
                 id="responsavel"
                 onChange={(e) => setResponsavel(e.target.value)}
                 value={responsavel}
-                className="bg-[#F9FBFA] border border-[#DCE5E0] rounded-xl  py-2 px-3"
+                className="bg-[#F9FBFA] border border-[#DCE5E0] rounded-xl focus:outline-none focus:border-[#24B195] focus:ring-[#24B195] py-2 px-3"
               >
                 <option value="">Selecione</option>
                 {pessoas.map((p) => (
@@ -138,7 +150,7 @@ export default function NovaOferta() {
             </div>
             <div className="flex flex-rol w-full justify-between gap-2">
               <button
-                className="bg-green-800 w-full py-2 px-4 rounded-xl text-white cursor-pointer"
+                className="bg-[#24B195] w-full py-2 px-4 rounded-xl text-white cursor-pointer"
                 type="submit"
               >
                 Salvar
