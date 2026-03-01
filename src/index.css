@@ -1,3 +1,4 @@
+@import "tailwindcss";
 /* Remove as margens padrão do navegador e garante que a página ocupe 100% */
 html,
 body {
