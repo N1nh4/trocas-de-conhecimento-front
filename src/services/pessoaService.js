@@ -1,4 +1,7 @@
+
 import api from "./api";
+
+// Pedro:
 
 // Função para criar uma nova pessoa (seu fluxo: NovaPessoa)
 export async function criarPessoa(data) {
@@ -33,3 +36,14 @@ export async function listarPessoas() {
     }
   }
 }
+
+// Alana:
+
+export const pessoaService = {
+  update: (id, data) => api.put(`/pessoas/${id}`, data),
+  delete: (id) => api.delete(`/pessoas/${id}`),
+
+  getAll: () => api.get('/pessoas'),
+  create: (data) => api.post('/pessoas', data),
+};
+
