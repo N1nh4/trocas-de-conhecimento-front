@@ -1,16 +1,103 @@
-# React + Vite
+# Banco de Trocas de Conhecimento
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 📌 Sobre o Projeto
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+O Banco de Trocas de Conhecimento – Frontend é a interface web da aplicação que permite que usuários visualizem, filtrem e gerenciem conhecimentos cadastrados na plataforma.
 
-## React Compiler
+Esta aplicação consome a API REST desenvolvida no backend, permitindo a interação do usuário com os dados de forma dinâmica e organizada.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Este projeto foi desenvolvido como parte do curso de Desenvolvimento Full Stack.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🎯 Objetivo
+
+Criar uma aplicação frontend responsável por:
+
+- Listagem de conhecimentos
+- Filtros por categoria e nível
+- Busca por título ou descrição
+- Visualização de detalhes
+- Integração com API REST
+- Atualização dinâmica da interface
+
+A aplicação segue boas práticas de organização, separação de responsabilidades e arquitetura escalável.
+
+---
+
+## 🛠 Tecnologias Utilizadas
+
+- React
+- Axios
+- Vite
+- JavaScript
+- Git & GitHub
+
+---
+
+## 🔗 Integração com Backend
+
+O frontend consome a API backend disponível em:
+
+```
+http://localhost:3000
+```
+
+É necessário que o backend esteja rodando antes de iniciar o frontend.
+
+Repositório do backend: [Trocas de Conhecimento - Backend](https://github.com/N1nh4/trocas-de-conhecimento)
+
+---
+
+## 🚀 Como Executar o Projeto
+
+### 1️⃣ Clonar o repositório
+No terminal, clone o projeto:
+
+```
+git clone https://github.com/N1nh4/trocas-de-conhecimento-front.git
+```
+### 2️⃣ Acessar a pasta do projeto
+```
+cd trocas-de-conhecimento-front
+```
+### 3️⃣ Instalar as dependências
+```
+npm install
+```
+### 4️⃣ Configurar variáveis de ambiente
+Crie um arquivo `.env` na raiz do projeto. Adicione a variável que define a URL da API backend:  
+```
+VITE_API_BASE_URL=http://localhost:3000
+```
+### 5️⃣ Iniciar o projeto
+```
+npm run dev
+```
+:heavy_check_mark: O frontend estará disponível em:
+```
+http://localhost:5173
+```
+
+## Requisitos para funcionamento:
+
+- O backend deve estar rodando em http://localhost:3000
+- O banco de dados deve estar configurado no backend
+- O CORS deve estar habilitado na API
+
+---
+
+## 👩‍💻 Desenvolvido por
+
+[Alana Carolina Pereira Abreu](https://github.com/N1nh4)  
+[Alessandra Kaline Cerqueira dos Santos](https://github.com/kalinecerqueira)  
+[Pedro Henrique Lorenzom Gutierrez](https://github.com/PhLorenzom)  
+[Rhobertta Grasielle Freitas Cardoso](https://github.com/rgrasielle)  
+
+
+
+
+
+
+

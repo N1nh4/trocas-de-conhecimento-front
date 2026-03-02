@@ -51,10 +51,11 @@ export function ConhecimentoCard({ conhecimento }) {
                 height: '100%',
                 display: 'flex',
                 flexDirection: 'column',
-                borderRadius: 2,
-                transition: 'box-shadow 0.3s',
+                borderRadius: 3,
+                transition: 'all 0.3s ease-in-out',
                 '&:hover': {
-                    boxShadow: 3
+                    boxShadow: '0px 6px 22px rgba(0, 0, 0, 0.08)',
+                    transform: 'translateY(-5px)',
                 }
             }}
         >
