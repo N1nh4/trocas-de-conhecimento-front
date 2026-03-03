@@ -67,8 +67,10 @@ export default function ConhecimentosList() {
     const conhecimentosDaPagina = conhecimentos.slice(indicePrimeiroCard, indiceUltimoCard);
     const totalPaginas = Math.ceil(conhecimentos.length / cardsPorPagina);
 
+    console.log("Meus conhecimentos:", conhecimentosDaPagina);
+
     return (
-        <Box sx={{ width: '100%', px: { xs: 2, md: 6, lg: 8 }, py: 4 }}>
+        <Box sx={{ width: '100%', px: { xs: 2, md: 6, lg: 8 }, py: 2 }}>
 
             {/* Botão Voltar */}
             <Box sx={{ mb: 2 }}>
@@ -273,7 +275,11 @@ export default function ConhecimentosList() {
             </Box>
 
             {/* Exibição de Loading ou Erro */}
-            {loading && <Box sx={{ display: 'flex', justifyContent: 'center', my: 4 }}><CircularProgress /></Box>}
+            {loading && (
+                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '50vh' }}>
+                    <CircularProgress sx={{ color: '#0d9488' }} />
+                </Box>
+            )}
             {error && <Typography color="error" align="center">Erro: {error}</Typography>}
 
             {/* Grid de Cards */}

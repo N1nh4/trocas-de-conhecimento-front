@@ -3,103 +3,103 @@ import { useNavigate } from "react-router-dom";
 import { criarPessoa } from "../services/pessoaService";
 
 export default function NovaPessoa() {
-    
-    //-- Estados dos campos do formulário:
 
-    const [nome, setNome] = useState("");
-    const [email, setEmail] = useState("");
-    const [telefone, setTelefone] = useState("");
-    const [descricao, setDescricao] = useState("");
+  //-- Estados dos campos do formulário:
 
-    
-    //-- Estados de controle de UX:
-
-    // "Loading" impede usuário de cliclar duas vezes e mostra feedback visual
-    const [loading, setLoading] = useState(false);
-    
-    // "erro" guarda mensagens de erro para exibir na tela
-    const [erro, setErro] = useState(null);
-
-    // "sucesso" controla se o cadastro foi efetuado com êxito
-    const [sucesso, setSucesso] = useState(false);
-
-    // "errosValidacao" guarda erros de cada campo
-    const [errosValidacao, setErrosValidacao] = useState({});
-
-    // useNavigate permite redirecionamento para outra página
-    const navigate = useNavigate();
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+  const [telefone, setTelefone] = useState("");
+  const [descricao, setDescricao] = useState("");
 
 
-    //-- Validação do formulário:
+  //-- Estados de controle de UX:
 
-    function validarFormulario() {
-        const erros = {};
+  // "Loading" impede usuário de cliclar duas vezes e mostra feedback visual
+  const [loading, setLoading] = useState(false);
 
-        if (!nome.trim()) {
-            erros.nome = "Nome completo é um campo obrigatório."
-        }
+  // "erro" guarda mensagens de erro para exibir na tela
+  const [erro, setErro] = useState(null);
 
-        if(!email.trim()) {
-            erros.email = "Email é obrigatório."
-        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            erros.email = "Informe um fomraato válido de email."
-        }
+  // "sucesso" controla se o cadastro foi efetuado com êxito
+  const [sucesso, setSucesso] = useState(false);
 
-        if (!telefone.trim()) {
-            erros.telefone = "Telefone é um campo obrigatório."
-        }
+  // "errosValidacao" guarda erros de cada campo
+  const [errosValidacao, setErrosValidacao] = useState({});
 
-        setErrosValidacao(erros);
-        return Object.keys(erros).length === 0; // true = sem erros.
+  // useNavigate permite redirecionamento para outra página
+  const navigate = useNavigate();
+
+
+  //-- Validação do formulário:
+
+  function validarFormulario() {
+    const erros = {};
+
+    if (!nome.trim()) {
+      erros.nome = "Nome completo é um campo obrigatório."
     }
 
-
-    // -- Envio do fromulário:
-
-    async function handleSubmit(e) {
-        e.preventDefault();
-
-        setErro(null);
-
-        if (!validarFormulario()) return;
-
-        try {
-            setLoading(true); // ativa o loading
-
-            // Monta objeto pessoa
-            const novaPessoa = {
-                nome: nome.trim(),
-                email: email.trim(),
-                telefone: telefone.trim(),
-                descricao: descricao.trim() || null,
-            };
-
-            await criarPessoa(novaPessoa);
-
-            setSucesso(true);
-
-            setTimeout( () => navigate("/"), 2000 );
-        } catch  (err) {
-            setErro(err.message);
-        } finally {
-            setLoading(false);
-        }
+    if (!email.trim()) {
+      erros.email = "Email é obrigatório."
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      erros.email = "Informe um fomraato válido de email."
     }
 
-    // -- Cancelar:
-
-    function handleCancelar() {
-        navigate("/");
+    if (!telefone.trim()) {
+      erros.telefone = "Telefone é um campo obrigatório."
     }
 
+    setErrosValidacao(erros);
+    return Object.keys(erros).length === 0; // true = sem erros.
+  }
 
-    // -- Criação da Tela:
 
-    return (
+  // -- Envio do fromulário:
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    setErro(null);
+
+    if (!validarFormulario()) return;
+
+    try {
+      setLoading(true); // ativa o loading
+
+      // Monta objeto pessoa
+      const novaPessoa = {
+        nome: nome.trim(),
+        email: email.trim(),
+        telefone: telefone.trim(),
+        descricao: descricao.trim() || null,
+      };
+
+      await criarPessoa(novaPessoa);
+
+      setSucesso(true);
+
+      setTimeout(() => navigate("/"), 2000);
+    } catch (err) {
+      setErro(err.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  // -- Cancelar:
+
+  function handleCancelar() {
+    navigate("/");
+  }
+
+
+  // -- Criação da Tela:
+
+  return (
     <div className="flex flex-col items-center bg-[#F9FBFA] min-h-screen py-12">
       {/* Cabeçalho da página */}
       <div className="flex flex-col items-center mb-8">
-        <h1 className="font-bold text-3xl text-gray-800">Cadastrar Pessoa</h1>
+        <h1 className="font-bold text-3xl text-gray-800">Cadastrar-se</h1>
         <p className="text-gray-500 mt-1">
           Preencha seus dados para participar da comunidade.
         </p>
@@ -134,9 +134,8 @@ export default function NovaPessoa() {
               placeholder="Seu nome"
               value={nome}
               onChange={(e) => setNome(e.target.value)}
-              className={`bg-[#F9FBFA] border rounded-xl py-2 px-3 focus:outline-none focus:border-[#24B195] focus:ring-1 focus:ring-[#24B195] ${
-                errosValidacao.nome ? "border-red-400" : "border-[#DCE5E0]"
-              }`}
+              className={`bg-[#F9FBFA] border rounded-xl py-2 px-3 focus:outline-none focus:border-[#24B195] focus:ring-1 focus:ring-[#24B195] ${errosValidacao.nome ? "border-red-400" : "border-[#DCE5E0]"
+                }`}
             />
             {/* Mensagem de erro específica do campo */}
             {errosValidacao.nome && (
@@ -154,9 +153,8 @@ export default function NovaPessoa() {
               placeholder="seu@email.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className={`bg-[#F9FBFA] border rounded-xl py-2 px-3 focus:outline-none focus:border-[#24B195] focus:ring-1 focus:ring-[#24B195] ${
-                errosValidacao.email ? "border-red-400" : "border-[#DCE5E0]"
-              }`}
+              className={`bg-[#F9FBFA] border rounded-xl py-2 px-3 focus:outline-none focus:border-[#24B195] focus:ring-1 focus:ring-[#24B195] ${errosValidacao.email ? "border-red-400" : "border-[#DCE5E0]"
+                }`}
             />
             {errosValidacao.email && (
               <span className="text-red-500 text-xs">{errosValidacao.email}</span>
@@ -173,9 +171,8 @@ export default function NovaPessoa() {
               placeholder="(11) 99999-0000"
               value={telefone}
               onChange={(e) => setTelefone(e.target.value)}
-              className={`bg-[#F9FBFA] border rounded-xl py-2 px-3 focus:outline-none focus:border-[#24B195] focus:ring-1 focus:ring-[#24B195] ${
-                errosValidacao.telefone ? "border-red-400" : "border-[#DCE5E0]"
-              }`}
+              className={`bg-[#F9FBFA] border rounded-xl py-2 px-3 focus:outline-none focus:border-[#24B195] focus:ring-1 focus:ring-[#24B195] ${errosValidacao.telefone ? "border-red-400" : "border-[#DCE5E0]"
+                }`}
             />
             {errosValidacao.telefone && (
               <span className="text-red-500 text-xs">{errosValidacao.telefone}</span>

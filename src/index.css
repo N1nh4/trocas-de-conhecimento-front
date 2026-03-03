@@ -8,6 +8,7 @@ body {
   min-height: 100vh;
   background-color: #f9fbfa;
   font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
+  overflow-y: scroll;
 }
 
 /* Garante que a raiz do React também possa crescer */
@@ -19,4 +20,20 @@ body {
 /* Ajuda o navegador a calcular os tamanhos das caixas corretamente */
 * {
   box-sizing: border-box;
+}
+
+/* Animações customizadas*/
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.anime-up {
+  animation: slideUpFade 0.5s ease-out forwards;
 }

@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import Layout from "../components/Layout";
 import Home from "../pages/Home";
 import ConhecimentosList from "../pages/ConhecimentosList";
 import ConhecimentoDetalhe from "../pages/ConhecimentoDetalhe";
@@ -12,19 +13,24 @@ export default function Router() {
         <BrowserRouter>
             <Routes>
 
-                {/* Landing page */}
+                {/* Landing page: Fica de fora do Layout pois tem nav e footer próprios */}
                 <Route path="/" element={<Home />} />
 
-                {/* Visualização */}
-                <Route path="/conhecimentos" element={<ConhecimentosList />} />
-                <Route path="/conhecimentos/:id" element={<ConhecimentoDetalhe />} />
+                {/* Grupo de rotas com o Layout padrão (Header e Footer) */}
+                <Route element={<Layout />}>
 
-                {/* Cadastros */}
-                <Route path="/pessoas/nova" element={<NovaPessoa />} />
-                <Route path="/ofertas/nova" element={<NovaOferta />} />
+                    {/* Visualização */}
+                    <Route path="/conhecimentos" element={<ConhecimentosList />} />
+                    <Route path="/conhecimentos/:id" element={<ConhecimentoDetalhe />} />
 
-                {/* Edição */}
-                <Route path="/ofertas/:id/editar" element={<EditarOferta />} />
+                    {/* Cadastros */}
+                    <Route path="/pessoas/nova" element={<NovaPessoa />} />
+                    <Route path="/ofertas/nova" element={<NovaOferta />} />
+
+                    {/* Edição */}
+                    <Route path="/ofertas/:id/editar" element={<EditarOferta />} />
+
+                </Route>
 
             </Routes>
         </BrowserRouter>
