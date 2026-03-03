@@ -12,6 +12,22 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 export function ConhecimentoCard({ conhecimento }) {
 
+    // Dicionário para colocar os acentos nas categorias
+    const categoriaConfig = {
+        TECNOLOGIA: 'Tecnologia',
+        DESIGN: 'Design',
+        IDIOMAS: 'Idiomas',
+        MUSICA: 'Música',
+        CULINARIA: 'Culinária',
+        ARTES: 'Artes',
+        MARKETING: 'Marketing',
+        FINANCAS: 'Finanças',
+        SAUDE: 'Saúde',
+        EDUCACAO: 'Educação',
+        ESPORTE: 'Esporte',
+        OUTROS: 'Outros'
+    };
+
     const nivelConfig = {
         INICIANTE: {
             texto: 'Iniciante',
@@ -44,6 +60,8 @@ export function ConhecimentoCard({ conhecimento }) {
 
     const configAtual = nivelConfig[conhecimento.nivel];
 
+    const nomeCategoria = categoriaConfig[conhecimento.categoria] || conhecimento.categoria;
+
     return (
         <Card
             variant="outlined"
@@ -63,10 +81,9 @@ export function ConhecimentoCard({ conhecimento }) {
                 {/* Tags de Categoria e Nível */}
                 <Box sx={{ display: 'flex', gap: 1, mb: 2 }}>
                     <Chip
-                        label={conhecimento.categoria.toLowerCase()}
+                        label={nomeCategoria}
                         size="small"
                         sx={{
-                            textTransform: 'capitalize',
                             bgcolor: '#F1F3F5',
                             color: '#495057',
                             fontWeight: 'bold',
