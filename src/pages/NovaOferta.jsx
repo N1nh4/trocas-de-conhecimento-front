@@ -1,6 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
-import { criarConhecimentoService } from "../services/conhecimentoService";
+import {
+  atualizarConhecimentoService,
+  criarConhecimentoService,
+  listarConhecimentosPorID,
+} from "../services/conhecimentoService";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function NovaOferta() {
   const [titulo, setTitulo] = useState("");
@@ -9,6 +14,12 @@ export default function NovaOferta() {
   const [nivel, setNivel] = useState("");
   const [responsavel, setResponsavel] = useState("");
   const [pessoas, setPessoas] = useState([]);
+
+  const navigate = useNavigate();
+
+  function handleNav() {
+    navigate("/conhecimentos");
+  }
 
   useEffect(() => {
     async function pessoaService() {
@@ -152,10 +163,14 @@ export default function NovaOferta() {
               <button
                 className="bg-[#24B195] w-full py-2 px-4 rounded-xl text-white cursor-pointer"
                 type="submit"
+                onClick={handleNav}
               >
                 Salvar
               </button>
-              <button className="bg-[#F9FBFA] w-full py-2 px-4 rounded-xl cursor-pointer">
+              <button
+                className="bg-[#F9FBFA] w-full py-2 px-4 rounded-xl cursor-pointer"
+                onClick={handleNav}
+              >
                 Cancelar
               </button>
             </div>
