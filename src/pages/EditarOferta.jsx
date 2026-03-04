@@ -96,8 +96,8 @@ export default function EditarOferta() {
             className="flex flex-col gap-4 "
             onSubmit={handleSubmit}
           >
-            <div className="flex flex-col">
-              <label htmlFor="" className="font-semibold">
+            <div className="flex flex-col gap-1">
+              <label htmlFor="" className="font-semibold text-sm">
                 Título *
               </label>
               <input
@@ -109,8 +109,8 @@ export default function EditarOferta() {
                 className="bg-[#F9FBFA] border border-[#DCE5E0] rounded-xl focus:outline-none focus:border-[#24B195] focus:ring-[#24B195] py-2 px-3"
               />
             </div>
-            <div className="flex flex-col">
-              <label htmlFor="" className="font-semibold">
+            <div className="flex flex-col gap-1">
+              <label htmlFor="" className="font-semibold text-sm">
                 Descrição *
               </label>
               <textarea
@@ -121,8 +121,8 @@ export default function EditarOferta() {
                 className="bg-[#F9FBFA] border border-[#DCE5E0] focus:outline-none focus:border-[#24B195] focus:ring-[#24B195] rounded-xl py-2 px-3"
               ></textarea>
             </div>
-            <div className="flex flex-col">
-              <label htmlFor="" className="font-semibold">
+            <div className="flex flex-col gap-1">
+              <label htmlFor="" className="font-semibold text-sm">
                 Categoria *
               </label>
               <select
@@ -142,8 +142,8 @@ export default function EditarOferta() {
                 ))}
               </select>
             </div>
-            <div className="flex flex-col">
-              <label htmlFor="" className="font-semibold">
+            <div className="flex flex-col gap-1">
+              <label htmlFor="" className="font-semibold text-sm">
                 Nível *
               </label>
               <select
@@ -161,8 +161,8 @@ export default function EditarOferta() {
                 ))}
               </select>
             </div>
-            <div className="flex flex-col">
-              <label htmlFor="" className="font-semibold">
+            <div className="flex flex-col gap-1">
+              <label htmlFor="" className="font-semibold text-sm">
                 Pessoa responsável *
               </label>
               <select
