@@ -189,7 +189,7 @@ export default function EditarOferta() {
                 Atualizar
               </button>
               <button
-                className="bg-[#F9FBFA] w-full py-2 px-4 rounded-xl cursor-pointer"
+                className="bg-[#F9FBFA] w-full py-2 px-4 rounded-xl cursor-pointer flex items-center gap-2 justify-center border border-[#DCE5E0] hover:bg-amber-600 hover:text-white"
                 onClick={handleNav}
               >
                 Cancelar
