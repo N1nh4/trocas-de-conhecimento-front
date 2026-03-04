@@ -8,13 +8,17 @@ export function useConhecimentos(filters) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
+    // Serializa o objeto para string e evitar loop infinito no useEffect
+    const filtrosSerializados = JSON.stringify(filters);
+
     useEffect(() => {
         async function fetchConhecimentos() {
             try {
                 setLoading(true);
                 setError(null);
 
-                const data = await listConhecimentos(filters);
+                // Deserializa de volta para passar para o serviço
+                const data = await listConhecimentos(JSON.parse(filtrosSerializados));
 
                 setConhecimentos(data);
             } catch (err) {
@@ -25,7 +29,7 @@ export function useConhecimentos(filters) {
         }
 
         fetchConhecimentos();
-    }, [filters]);
+    }, [filtrosSerializados]);
 
     return {
         conhecimentos,

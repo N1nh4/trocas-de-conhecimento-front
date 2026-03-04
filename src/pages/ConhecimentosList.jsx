@@ -1,5 +1,6 @@
 // Rhobertta
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useConhecimentos } from '../hooks/useConhecimentos';
 import { ConhecimentoCard } from '../components/ConhecimentoCard';
 import {
@@ -18,8 +19,12 @@ import {
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
+import IconButton from '@mui/material/IconButton';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 export default function ConhecimentosList() {
+
+    const navigate = useNavigate();
 
     // Estados para os filtros
     const [busca, setBusca] = useState('');
@@ -29,29 +34,31 @@ export default function ConhecimentosList() {
     // Filtros que serão enviados para a API
     const [filtrosAplicados, setFiltrosAplicados] = useState({});
 
+    // Hook para buscar os conhecimentos com base nos filtros
     const { conhecimentos, loading, error } = useConhecimentos(filtrosAplicados);
 
     // Lógica de paginação
     const [paginaAtual, setPaginaAtual] = useState(1);
     const cardsPorPagina = 6;
 
-    // Função para aplicar os filtros ao clicar no botão Filtrar
-    const handleFiltrar = () => {
-        setFiltrosAplicados({
-            busca: busca || undefined,
-            categoria: categoria || undefined,
-            nivel: nivel || undefined
-        });
-        setPaginaAtual(1);
-    };
+    // Lógica de filtro automático com debounce
+    useEffect(() => {
+        const tempoDeEspera = setTimeout(() => {
+            setFiltrosAplicados({
+                busca: busca || undefined,
+                categoria: categoria || undefined,
+                nivel: nivel || undefined
+            });
+            setPaginaAtual(1);
+        }, 300);
+        return () => clearTimeout(tempoDeEspera);
+    }, [busca, categoria, nivel]);
 
-    // Função para limpar tudo
+    // Função para limpar os filtros
     const handleLimpar = () => {
         setBusca('');
         setCategoria('');
         setNivel('');
-        setFiltrosAplicados({});
-        setPaginaAtual(1);
     };
 
     // Cálculos da paginação
@@ -60,8 +67,29 @@ export default function ConhecimentosList() {
     const conhecimentosDaPagina = conhecimentos.slice(indicePrimeiroCard, indiceUltimoCard);
     const totalPaginas = Math.ceil(conhecimentos.length / cardsPorPagina);
 
+    console.log("Meus conhecimentos:", conhecimentosDaPagina);
+
     return (
-        <Box sx={{ width: '100%', px: { xs: 2, md: 6, lg: 8 }, py: 4 }}>
+        <Box sx={{ width: '100%', px: { xs: 2, md: 6, lg: 8 }, py: 2 }}>
+
+            {/* Botão Voltar */}
+            <Box sx={{ mb: 2 }}>
+                <IconButton
+                    onClick={() => navigate('/')}
+                    aria-label="voltar"
+                    sx={{
+                        color: '#64748b',
+                        transition: 'all 0.2s ease-in-out',
+                        '&:hover': {
+                            color: '#ffffff',
+                            backgroundColor: '#f97316',
+                            transform: 'translateX(-4px)'
+                        }
+                    }}
+                >
+                    <ArrowBackIcon />
+                </IconButton>
+            </Box>
 
             {/* Cabeçalho */}
             <Box sx={{ mb: 5 }}>
@@ -88,7 +116,17 @@ export default function ConhecimentosList() {
                         placeholder="Buscar por título ou descrição..."
                         value={busca}
                         onChange={(e) => setBusca(e.target.value)}
-                        sx={{ flexGrow: 1 }}
+                        sx={{
+                            flexGrow: 1,
+                            '& .MuiOutlinedInput-root': {
+                                '&:hover fieldset': {
+                                    borderColor: '#24B195',
+                                },
+                                '&.Mui-focused fieldset': {
+                                    borderColor: '#24B195',
+                                },
+                            }
+                        }}
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
@@ -99,7 +137,12 @@ export default function ConhecimentosList() {
                         }}
                     />
 
-                    <FormControl size="small" sx={{ minWidth: 150 }}>
+                    <FormControl size="small" sx={{
+                        minWidth: 180,
+                        '& .MuiInputLabel-root.Mui-focused': {
+                            color: '#24B195',
+                        }
+                    }}>
                         <InputLabel>Categoria</InputLabel>
                         <Select
                             value={categoria}
@@ -108,7 +151,10 @@ export default function ConhecimentosList() {
                             sx={{
                                 borderRadius: 2,
                                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                                    borderColor: '#f97316',
+                                    borderColor: '#24B195',
+                                },
+                                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                                    borderColor: '#24B195',
                                 }
                             }}
                             MenuProps={{
@@ -152,7 +198,12 @@ export default function ConhecimentosList() {
                         </Select>
                     </FormControl>
 
-                    <FormControl size="small" sx={{ minWidth: 150 }}>
+                    <FormControl size="small" sx={{
+                        minWidth: 180,
+                        '& .MuiInputLabel-root.Mui-focused': {
+                            color: '#24B195',
+                        }
+                    }}>
                         <InputLabel>Nível</InputLabel>
                         <Select
                             value={nivel}
@@ -161,7 +212,10 @@ export default function ConhecimentosList() {
                             sx={{
                                 borderRadius: 2,
                                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                                    borderColor: '#f97316',
+                                    borderColor: '#24B195',
+                                },
+                                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                                    borderColor: '#24B195',
                                 }
                             }}
                             MenuProps={{
@@ -195,22 +249,6 @@ export default function ConhecimentosList() {
                             <MenuItem value="AVANCADO">Avançado</MenuItem>
                         </Select>
                     </FormControl>
-                    <Button
-                        variant="contained"
-                        disableElevation
-                        onClick={handleFiltrar}
-                        sx={{
-                            bgcolor: '#24B195',
-                            color: 'white',
-                            '&:hover': { bgcolor: '#19a78b' },
-                            textTransform: 'none',
-                            borderRadius: 2,
-                            height: '40px',
-                            px: 3,
-                        }}
-                    >
-                        Filtrar
-                    </Button>
 
                     <Button
                         variant="outlined"
@@ -226,8 +264,8 @@ export default function ConhecimentosList() {
                             transition: 'all 0.2s ease',
                             '&:hover': {
                                 borderColor: '#f97316',
-                                color: '#f97316',
-                                backgroundColor: 'rgba(249, 115, 22, 0.04)'
+                                color: '#ffffff',
+                                backgroundColor: '#f97316'
                             }
                         }}
                     >
@@ -237,7 +275,11 @@ export default function ConhecimentosList() {
             </Box>
 
             {/* Exibição de Loading ou Erro */}
-            {loading && <Box sx={{ display: 'flex', justifyContent: 'center', my: 4 }}><CircularProgress /></Box>}
+            {loading && (
+                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '50vh' }}>
+                    <CircularProgress sx={{ color: '#0d9488' }} />
+                </Box>
+            )}
             {error && <Typography color="error" align="center">Erro: {error}</Typography>}
 
             {/* Grid de Cards */}
@@ -267,6 +309,15 @@ export default function ConhecimentosList() {
                                 page={paginaAtual}
                                 onChange={(evento, novaPagina) => setPaginaAtual(novaPagina)}
                                 color="primary"
+                                sx={{
+                                    '& .MuiPaginationItem-root.Mui-selected': {
+                                        backgroundColor: '#f97316',
+                                        color: '#fff',
+                                        '&:hover': {
+                                            backgroundColor: '#ea580c',
+                                        }
+                                    }
+                                }}
                             />
                         </Box>
                     )}
