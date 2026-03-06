@@ -8,7 +8,6 @@ body {
   min-height: 100vh;
   background-color: #f9fbfa;
   font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
-  overflow-y: scroll;
 }
 
 /* Garante que a raiz do React também possa crescer */
