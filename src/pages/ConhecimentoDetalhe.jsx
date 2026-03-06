@@ -19,6 +19,11 @@ export default function ConhecimentoDetalhe() {
   const { id } = useParams();
   const navigate = useNavigate();
 
+  function handleContato() {
+    const email = conhecimento.pessoa.email;
+    window.location.href = `mailto:${email}`;
+  }
+
   function handleNavConhecimentos() {
     navigate("/conhecimentos");
   }
@@ -58,7 +63,7 @@ export default function ConhecimentoDetalhe() {
           </button>
         </div>
 
-        <div className="bg-white p-8 rounded-xl">
+        <div className="bg-white p-8 rounded-xl shadow-sm">
           <div className="flex flex-row gap-2">
             <div className="bg-[#F1F3F5] px-2 rounded-lg text-sm">
               {conhecimento.categoria.toLowerCase()}
@@ -103,7 +108,10 @@ export default function ConhecimentoDetalhe() {
           <hr className="border-none h-[1px] bg-[#e7e9e8] my-8" />
 
           <div className="flex gap-2">
-            <button className="bg-[#24B195] w-full py-2 px-4 rounded-xl text-white cursor-pointer">
+            <button
+              className="bg-[#24B195] w-full py-2 px-4 rounded-xl text-white cursor-pointer"
+              onClick={handleContato}
+            >
               Entrar em contato
             </button>
             <button
